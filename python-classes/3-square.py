@@ -1,10 +1,16 @@
 #!/usr/bin/python3
-""" Class Definition"""
+"""Define Square class"""
 
 
 class Square:
-    def __init__(self, size=0):
+    """define fields and methods of Square"""
 
+    def __init__(self, size=0):
+        """ Square Constructor.
+
+            args:
+               size (int, optional): The size of the square. Defaults to 0.
+        """
         if type(size) is not int:
             raise TypeError("size must be an integer")
         elif size < 0:
