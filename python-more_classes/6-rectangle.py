@@ -1,74 +1,93 @@
 #!/usr/bin/python3
-"""Create an empty class named Rectangle"""
+"""
+Module 6-rectangle
+Contains class Rectangle with private attribute width and height,
+public area and perimeter methods, allows printing #'s, deletes,
+and has public attribute to keep track of number of instances
+"""
 
 
-class Rectangle:
-    """define the fields and methods here"""
+class Rectangle():
+    """
+    Defines class rectangle with private attribute width and height
+
+    Args:
+        width (int): width
+        height (int): height
+
+    Attributes:
+        number_of_instances (int): number of instances created and not deleted
+
+    Functions:
+        __init__(self, width, height)
+        width(self)
+        width(self, value)
+        height(self)
+        height(self, value)
+        area(self)
+        perimeter(self)
+        __str__(self)
+        __repr__(self)
+        __del__(self)
+    """
+    number_of_instances = 0
 
     def __init__(self, width=0, height=0):
-        """ Rectangle Constructor.
-
-            args:
-                width:width of rectangle
-                height:height of rectangle
-        """
+        """ Initialize rectangles """
         self.width = width
         self.height = height
+        type(self).number_of_instances += 1
+
+    def __del__(self):
+        """ Deletes instance of class """
+        print("Bye rectangle...")
+        type(self).number_of_instances -= 1
 
     @property
     def width(self):
-        """width getter method"""
+        """ Getter returns width """
         return self.__width
 
     @width.setter
     def width(self, value):
-        """width setter method"""
-        if type(value) is not int:
+        """ Setter sets width if int > 0 """
+        if not isinstance(value, int):
             raise TypeError("width must be an integer")
-        elif value < 0:
+        if value < 0:
             raise ValueError("width must be >= 0")
-        else:
-            self.__width = value
+        self.__width = value
 
     @property
     def height(self):
-        """heigth getter method"""
+        """ Getter returns height """
         return self.__height
 
     @height.setter
     def height(self, value):
-        """height setter method"""
-
-        if type(value) is not int:
+        """ Setter sets height if int > 0 """
+        if not isinstance(value, int):
             raise TypeError("height must be an integer")
-        elif value < 0:
+        if value < 0:
             raise ValueError("height must be >= 0")
-        else:
-            self.__height = value
+        self.__height = value
 
     def area(self):
-        """calculate the area of rectangle"""
+        """ Return width * height """
         return self.__width * self.__height
 
     def perimeter(self):
-        """calculate the perimeter of rectangle"""
-        if self.__height == 0 or self.__width == 0:
+        """ Return 2*width + 2*height (or return 0 if width or height is 0)"""
+        if self.__width == 0 or self.__height == 0:
             return 0
-        else:
-            return (self.__width * 2 + self.__height * 2)
+        return (2 * self.__width) + (2 * self.height)
 
     def __str__(self):
-        if self.__height == 0 or self.__width == 0:
+        """ Prints rectangle with #'s """
+        if self.__width == 0 or self.__height == 0:
             return ""
-        else:
-            rec_string = ""
-            for i in range(0, self.__height - 1):
-                rec_string += "#" * self.__width + "\n"
-            rec_string += "#" * self.__width
-            return rec_string
+        pic = "\n".join(["#" * self.__width for rows in range(self.__height)])
+        return pic
 
     def __repr__(self):
-        return ("Rectangle({}, {})".format(self.__width, self.__height))
-
-    def __del__(self):
-        print("Bye rectangle...")
+        """ String representation to recreate new instance """
+        return "Rectangle({:d}, {:d})".format(self.width, self.height)
