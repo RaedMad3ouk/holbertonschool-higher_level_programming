@@ -73,7 +73,7 @@ class Rectangle:
 
     def __repr__(self):
         """retrun a representation  for the rectangle """
-        return("Rectangle({}, {})".format(self.__width, self.__height))
+        return ("Rectangle({}, {})".format(self.__width, self.__height))
 
     def __del__(self):
         """print message bye rectangle whe wen delete a rectangle instance"""
