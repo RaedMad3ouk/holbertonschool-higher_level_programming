@@ -1,30 +1,27 @@
 #!/usr/bin/python3
-"""
-     Module for text_indentation functions
-
-
+"""Contains a function that separates a string based on certain characters
 """
 
 
 def text_indentation(text):
-    """ Text indentation function
-
+    """Function puts in a new line if it detects a . or ? or :
+    Args:
+        text: the string to look through
+    Return:
+        Nothing
     """
-    if not isinstance(text, str):
+
+    flag = 0
+    if type(text) is not str:
         raise TypeError("text must be a string")
-
-    if text is "":
-        raise TypeError("text must be a string")
-
-    newtext = ""
-    delims = ".?:"
-    space = " "
-
-    for i in range(len(text)):
-        if text[i] in space:
-            if text[i-1] in delims:
-                continue
-        newtext += text[i]
-        if text[i] in delims:
-            newtext += "\n\n"
-    print(newtext)
+    for i in text:
+        if flag == 1 and i is ' ':
+            print('', end='')
+            flag = 0
+            continue
+        if i is '.' or i is '?' or i is ':':
+            print("{}\n".format(i))
+            flag = 1
+        else:
+            print(i, end='')
+            flag = 0
